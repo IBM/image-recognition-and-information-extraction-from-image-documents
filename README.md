@@ -73,29 +73,29 @@ To create your own dataset, follow the following naming structure for each type 
 
 ![](images/Dir_structure-1.png)
 
-You can use the dataset provided in this code pattern or create your own dataset. To use the dataset provided in this code pattern, download the Data.zip file from Data folder of [this repository](https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents)
+You can use the dataset provided in this code pattern or create your own dataset. To use the dataset provided in this code pattern, download the ``Data.zip`` file from Data folder of [this repository](https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents)
 
 #### To create your own dataset
 Create three folders named `Train_Data`, `Test_Data`, `Val_Data` which are used for training, testing and validation respectively. Since we have used Cheque, Form Documents, Driving License, Pancard and Passport create folders to indicate the types of documents `Cheque`,`Documents`,`Driving_License`,`Pancard`,`Passport` which will be the classes that machine learning model learns and classifies images.
 
 Compress the `Data` folder so it can be uploaded to Object Storage.
 
-If you are using mac, the compression creates some additional files which should be deleted. On command prompt, go to the compressed file location and run the following commands.
-
+If you are using mac, the compression creates some additional files which should be deleted. On command prompt, go to the compressed file location and run the following commands:
+```
 * zip -d Data.zip \__MACOSX/\\*
 * zip -d Data.zip \\\*/.DS_Store
-
+```
 ### Test images for classification
 
 Towards the end of the notebook, we need to provide test images which should be classified by the notebook after training is done. Place all images that need to be classified have to be in a folder. It's named as `testdoc-external.zip` in this code pattern. You can supply your own set of images for classification or use the one provided in this code pattern.
 
 If you are using mac, the compression creates some additional files which should be deleted. On command prompt, go to the compressed file location and run the following commands.
 
-For MACOSX use the following commands to remove the redundant folders/files created-
-
+For MACOSX use the following commands to remove the redundant folders/files created:
+```
 * zip -d test_doc-external.zip \__MACOSX/\\*
 * zip -d test_doc-external.zip \\\*/.DS_Store
-
+```
 
 ### 2.4 Create Obect Storage service instance
 [Create an Object Storage instance](https://console.bluemix.net/catalog/services/cloud-object-storage), if you do not have an instance created earlier.
@@ -108,23 +108,23 @@ Login to [IBM Cloud Dashboard](http://console.bluemix.net/). Click on the Watson
 
 * If a project is not created earlier then click `New Project`. Provide any Name. Object Storage instance should already be selected by default. Verify it is the instance that you want to use. If not select the instance you want from drop down list
 * Click on `Assets` tab. Navigate to `Notebooks` section below. Click `Create Notebook`
-* Select the From URL tab.
+* Select the `From URL` tab.
 * Enter a name for the notebook.
 * Optionally, enter a description for the notebook.
 * Enter this Notebook URL: <TODO enter URL of notebook of final repo>
 * Under Runtime select Default Python with 4 CPU and 16GB RAM
-* Click the Create button.
+* Click the `Create` button.
 
 ![](images/create_notebook_from_url_imageclassification.png)
 
 ### 2.5 Add data files
 
-* Add the data zip file created/downloaded in [this section](#21-data-preparation) to Object Storage. In Watson Studio, go to your project default page, use Find and Add Data (look for the 10/01 icon) and its Files tab
-* Click browse and upload Data.zip file
+* Add the data zip file created/downloaded in [this section](#21-data-preparation) to Object Storage. In Watson Studio, go to your project default page, use `Find and Add Data` (look for the 10/01 icon) and its `Files` tab
+* Click browse and upload `Data.zip` file
 
 ![](images/add_file.png)
 
-Repeat above step for test images testdoc-external.zip file.
+Repeat above step for test images `testdoc-external.zip` file.
 
 Note:  It is possible to use your own data files. If you use an image file from your computer, make sure to conform to the directory structure mentioned above and zip it.
 
@@ -149,8 +149,8 @@ Add the Object Storage credentials to the notebook
 Select the cell below 2.1 Add your service credentials for Object Storage section in the notebook to update the credentials for Object Store.
 
 * Delete the contents of the cell
-* Use Find and Add Data (look for the 10/01 icon) and its Files tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below 2.2 Add...
-* Under Files, click the dropdown for `Insert to code` for Data.zip
+* Use `Find and Add Data` (look for the 10/01 icon) and its Files tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below 2.2 Add...
+* Under Files, click the dropdown for `Insert to code` for `Data.zip`
 * Click `Insert StreamingBody object`.
 * Make sure the credentials are saved as streaming_body_1. If not edit and replace the numbers to 1. There should be four such occurrences in the cell.
 
@@ -159,14 +159,14 @@ Select the cell below 2.1 Add your service credentials for Object Storage sectio
 Select the cell in Section 4.4
 
 * Delete the contents of the cell
-* Use Find and Add Data (look for the 10/01 icon) and its Files tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below 2.2 Add...
-* Under Files, click the dropdown for `Insert to code` for test_doc-external.zip
+* Use `Find and Add Data` (look for the 10/01 icon) and its Files tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below 2.2 Add...
+* Under Files, click the dropdown for `Insert to code` for `test_doc-external.zip`
 * Click `Insert StreamingBody object`.
 * Make sure the credentials are saved as streaming_body_2. If not edit and replace the numbers to 2. There should be four such occurrences in the cell.
 
 ![](images/add_file_imageclassification_testing.png)
 
-Run the notebook by clicking on Cell>Run all in the menu bar.
+Run the notebook by clicking on `Cell`>`Run all` in the menu bar.
 
 Depending on the dataset, the training of the model takes about one hour. When all the cells in the notebook have run without any errors, we have our machine learning model trained. The trained model also classifies test images. It will point out to the test image that was of the type `Document` (application form document)
 
@@ -180,7 +180,7 @@ Depending on the dataset, the training of the model takes about one hour. When a
 We will use tesseract OCR for text extraction. We need to install tesseract engine on our local machine. And so we will run the next notebook on local.  
 * [Install Tesseract OCR](https://github.com/tesseract-ocr/tesseract/wiki). Follow the instructions according to your system specifications
 * To run the notebook locally, we will install Jupyter notebook on local. Refer [this link](http://jupyter.readthedocs.io/en/latest/install.html) for Jupyter installation instructions
-* Download Convert_Image_to_Text.ipynb from repo <TODO final code repo details> and open it in Jupyter notebook
+* Download `Convert_Image_to_Text.ipynb` from repo <TODO final code repo details> and open it in Jupyter notebook
 * Under section 2.1, update the path of the form document. The form document was identified by the previous notebook run. <TODO did we save the file in Object storage? if yes, mention about path on Object storage form doc 1>
 
 ![](images/analyze_res1.png)
@@ -193,7 +193,7 @@ Update the path of `credentials.json` file in `2.2 Connect to Object Storage` of
 
 * The output of this section will be the extracted text, saved as a text file in your current working directory. <TODO.. is there any update here after latest changes?. yes, will be directly saved in Object Storage as form-doc-x.txt>
 
-Run the notebook by clicking on Cell>Run all in the menu bar.
+Run the notebook by clicking on `Cell`>`Run all` in the menu bar.
 
 ## 4. Entity Extraction and Document Classification
 
@@ -210,14 +210,14 @@ Create the following IBM Cloud service and give a unique name for the service:
 
 Login to [IBM Cloud Dashboard](http://console.bluemix.net/). Click on the Watson Studio instance that was created earlier. Click `Get Started` button at the bottom of the page.
 
-* Under Projects, select the project
+* Under `Projects`, select the project
 * Click on `Assets` tab. Navigate to `Notebooks` section below. Click `Create Notebook`
-* Select the From URL tab.
+* Select the `From URL` tab.
 * Enter a name for the notebook.
 * Optionally, enter a description for the notebook.
 * Enter this Notebook URL: <TODO enter URL of notebook of final repo>
 * Under Runtime select Default Python with 1 CPU and 4GB RAM
-* Click the Create button.
+* Click the `Create` button.
 
 ![](images/create_notebook_from_url.png)
 
@@ -233,7 +233,7 @@ Check the file <TODO/link to repo/Configuration/config_entity_extract.txt>. This
 Check the file <TODO/link to repo/Configuration/config_legaldocs.txt>. This file contains information to identify the type of the document. It specifies what all entities should be available in a document to categorise the document to a particular type. E.g. A document can be a rental agreement document if it has entities `Leaser Term`, `Rent`, `Security Deposit`.
 
 * Download <TODO configuration files> from the repo <TODO final repo link>
-* Add the above configuration files to Object Storage. In Watson Studio, go to your project default page, use Find and Add Data (look for the 10/01 icon) and its Files tab
+* Add the above configuration files to Object Storage. In Watson Studio, go to your project default page, use `Find and Add Data` (look for the 10/01 icon) and its `Files` tab
 * Also upload the text files obtained as a result of `Text Extraction Using Optical Character Recognition`
 
 ![](images/add_file.png)
@@ -273,13 +273,13 @@ Select the cell below `2.1 Add your service credentials from IBM Cloud for the W
 * Select the cell below `2.2 Add your service credentials for Object Storage` section in the notebook to update the credentials for Object Store.
 * Delete the contents of the cell
 * Use `Find and Add Data` (look for the `10/01` icon) and its `Files` tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below `2.2 Add...`
-* Select `Insert to code` (below your sample_text.txt).
+* Select `Insert to code` (below your `sample_text.txt`).
 * Click `Insert Crendentials` from drop down menu.
 * Make sure the credentials are saved as `credentials_1`.
 
 ![](images/service_credentials.png)
 
-Run the notebook by clicking on Cell>Run all in the menu bar.
+Run the notebook by clicking on `Cell`>`Run all` in the menu bar.
 
 <TODO explain how the notebook uses configuration files and provides entities and their values. Refer to Balaji's patterns - document classifier>
 
