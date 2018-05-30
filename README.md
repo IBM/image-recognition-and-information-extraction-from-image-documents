@@ -97,7 +97,7 @@ For MACOSX use the following commands to remove the redundant folders/files crea
 * zip -d test_doc-external.zip \\\*/.DS_Store
 ```
 
-### 2.4 Create Obect Storage service instance
+### 2.4 Create Object Storage service instance
 [Create an Object Storage instance](https://console.bluemix.net/catalog/services/cloud-object-storage), if you do not have an instance created earlier.
 
 ### 2.4 Create notebook
@@ -111,7 +111,7 @@ Login to [IBM Cloud Dashboard](http://console.bluemix.net/). Click on the Watson
 * Select the `From URL` tab.
 * Enter a name for the notebook.
 * Optionally, enter a description for the notebook.
-* Enter this Notebook URL: <TODO enter URL of notebook of final repo>
+* Enter this Notebook URL: https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/notebooks/Image%20Classification%20of%20Documents.ipynb
 * Under Runtime select Default Python with 4 CPU and 16GB RAM
 * Click the `Create` button.
 
@@ -152,9 +152,9 @@ Select the cell below 2.1 Add your service credentials for Object Storage sectio
 * Use `Find and Add Data` (look for the 10/01 icon) and its Files tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below 2.2 Add...
 * Under Files, click the dropdown for `Insert to code` for `Data.zip`
 * Click `Insert StreamingBody object`.
-* Make sure the credentials are saved as streaming_body_1. If not edit and replace the numbers to 1. There should be four such occurrences in the cell.
-
 ![](images/add_file_imageclassification.png)
+* Make sure the credentials are saved as streaming_body_1. If not edit and replace the numbers to 1. There should be four such occurrences in the cell as shown in the below image
+![](images/Data_Streaming_Object.png)
 
 Select the cell in Section 4.4
 
