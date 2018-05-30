@@ -162,16 +162,19 @@ Select the cell in Section 4.4
 * Use `Find and Add Data` (look for the 10/01 icon) and its Files tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below 2.2 Add...
 * Under Files, click the dropdown for `Insert to code` for `test_doc-external.zip`
 * Click `Insert StreamingBody object`.
-* Make sure the credentials are saved as streaming_body_2. If not edit and replace the numbers to 2. There should be four such occurrences in the cell.
+* Make sure the credentials are saved as streaming_body_2. If not edit and replace the numbers to 2. There should be four such occurrences in the cell as shown in below image
 
 ![](images/add_file_imageclassification_testing.png)
+
+![](images/test_streaming_object.png)
 
 Run the notebook by clicking on `Cell`>`Run all` in the menu bar.
 
 Depending on the dataset, the training of the model takes about one hour. When all the cells in the notebook have run without any errors, we have our machine learning model trained. The trained model also classifies test images. It will point out to the test image that was of the type `Document` (application form document)
 
-<TODO provide image of identified document when notebook is run>
+![](images/form_document_identified.png)
 
+This notebook was able to identify the form document from a set of application documents.
 
 ## 3. Text Extraction Using Optical Character Recognition
 
@@ -180,20 +183,22 @@ Depending on the dataset, the training of the model takes about one hour. When a
 We will use tesseract OCR for text extraction. We need to install tesseract engine on our local machine. And so we will run the next notebook on local.  
 * [Install Tesseract OCR](https://github.com/tesseract-ocr/tesseract/wiki). Follow the instructions according to your system specifications
 * To run the notebook locally, we will install Jupyter notebook on local. Refer [this link](http://jupyter.readthedocs.io/en/latest/install.html) for Jupyter installation instructions
-* Download `Convert_Image_to_Text.ipynb` from repo <TODO final code repo details> and open it in Jupyter notebook
-* Under section 2.1, update the path of the form document. The form document was identified by the previous notebook run. <TODO did we save the file in Object storage? if yes, mention about path on Object storage form doc 1>
+* Download `Convert_Image_to_Text.ipynb` from repo https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/notebooks/ and open it in Jupyter notebook on local machine
+* Under section 2.1, update the path of the form document. The form document was identified by the previous notebook run.
 
 ![](images/analyze_res1.png)
 
 Create a file named `credentials.json` and save it anywhere on local machine, say on desktop. This will be a placeholder for cloud object storage bucket credentials. To get the credentials, go to your Cloud Object Storage instance and click on `Service Credentials`. In the desired bucket relevant to your project on Watson Studio, click on `View Credentials`
 ![](images/credential_json.png)
-<TODO what to copy from credentials to json file? Provide a sample. Copy everything as it is and paste it as a json file>
+
+Click on `Copy to Clipboard` icon on the right to copy credentials. Paste the contents in `credentials.json` file.
 
 Update the path of `credentials.json` file in `2.2 Connect to Object Storage` of notebook
 
-* The output of this section will be the extracted text, saved as a text file in your current working directory. <TODO.. is there any update here after latest changes?. yes, will be directly saved in Object Storage as form-doc-x.txt>
-
 Run the notebook by clicking on `Cell`>`Run all` in the menu bar.
+
+* The output of this section will be the extracted text, which will be saved to Object Storage as `form-doc-x.txt`, where x is the nth form document. e,g, if it's first form document the file is stored as `form-doc-1.txt`. This file will be used later by another notebook to extract information from text extracted.
+
 
 ## 4. Entity Extraction and Document Classification
 
@@ -215,32 +220,28 @@ Login to [IBM Cloud Dashboard](http://console.bluemix.net/). Click on the Watson
 * Select the `From URL` tab.
 * Enter a name for the notebook.
 * Optionally, enter a description for the notebook.
-* Enter this Notebook URL: <TODO enter URL of notebook of final repo>
+* Enter this Notebook URL: https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/notebooks/Entity%20Extraction%20and%20Document%20Classification.ipynb
 * Under Runtime select Default Python with 1 CPU and 4GB RAM
 * Click the `Create` button.
 
 ![](images/create_notebook_from_url.png)
 
 
-### 4.3 Add the data file <TODO.. how data file is added>
-<TODO.. explain about configuration files>
+### 4.3 Upload text data and configuration data to Object Storage
+
 There are two configuration files
 
 #### 4.3.1 Entities Config
-Check the file <TODO/link to repo/Configuration/config_entity_extract.txt>. This file contains regular expressions and chunking patterns which are used to identify entities and their values from the text of the form document
+Check the file https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/Configuration/config_entity_extract.txt. This file contains regular expressions and chunking patterns which are used to identify entities and their values from the text of the form document.
+The configuration json controls the way the text is classified. The classification process is divided into stages - Base Tagging and Domain Tagging. The Base Tagging stage can be used to specify keywords based classification, regular expression based classification, and tagging based on chunking expressions. The Domain Tagging stage can be used to specify classification that is specific to the domain, in order to augment the results from Watson Natural Language.
 
 #### 4.3.2 Document Type config
-Check the file <TODO/link to repo/Configuration/config_legaldocs.txt>. This file contains information to identify the type of the document. It specifies what all entities should be available in a document to categorise the document to a particular type. E.g. A document can be a rental agreement document if it has entities `Leaser Term`, `Rent`, `Security Deposit`.
+Check the file https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/Configuration/config_legaldocs.txt. This file contains information to identify the type of the document. It specifies what all entities should be available in a document to categorise the document to a particular type. E.g. A document can be a rental agreement document if it has entities `Leaser Term`, `Rent`, `Security Deposit`.
 
-* Download <TODO configuration files> from the repo <TODO final repo link>
-* Add the above configuration files to Object Storage. In Watson Studio, go to your project default page, use `Find and Add Data` (look for the 10/01 icon) and its `Files` tab
-* Also upload the text files obtained as a result of `Text Extraction Using Optical Character Recognition`
+* Download `config_entity_extract.txt` and `config_legaldocs.txt` from the repo https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/tree/master/Configuration
+* Add the above configuration files to Object Storage. In Watson Studio, go to your project default page, use `Find and Add Data` (look for the 10/01 icon) and its `Files` tab. Upload these files onto Cloud Storage using `browse` button
 
 ![](images/add_file.png)
-
-Note: It is possible to use your own data files. If you use an image file from your computer, make sure to conform to the naming structure mentioned above.
-
-Update file names for your own data file
 
 If you use your own data and configuration files, you will need to update the variables that refer to the data files in the Jupyter Notebook.
 
@@ -281,9 +282,7 @@ Select the cell below `2.1 Add your service credentials from IBM Cloud for the W
 
 Run the notebook by clicking on `Cell`>`Run all` in the menu bar.
 
-<TODO explain how the notebook uses configuration files and provides entities and their values. Refer to Balaji's patterns - document classifier>
-
-Entities identified are displayed as shown in below image
+Entities identified from the form document are displayed as shown in below image
 ![](images/analyze_res2.png)
 
 Document type identified is displayed as shown in below image
