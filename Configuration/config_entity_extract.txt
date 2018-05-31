@@ -1,19 +1,19 @@
 {
 	"configuration":{
 		"class":{
-			
+
 				"stages" : [
 					{
 					"name": "Intro",
 					"steps": [
 					{
-						"type":"text",	
+						"type":"text",
 						"tag":"Landlord",
 						"regex": "Chunk: {<NNP> <NNP> (<IN> <VBP>)?}"
 					},
-				
+
 					{
-						"type":"text",	
+						"type":"text",
 						"tag":"Tenant",
 						"regex": "Chunk: {<NNP> <NNP> (<IN> <VBP>)?}"
 					},
@@ -25,9 +25,9 @@
 					}
 
 					]
-				
+
 					},
-					
+
 					{
 					"name": "Term",
 					"steps":[
@@ -37,14 +37,14 @@
 						"tag":"beginning on",
 						"regex":"\\d+/\\d+/\\d+"
 					},
-					
+
 					{
 						"term_type": "Fixed",
 						"type":"date",
 						"tag":"ending on",
 						"regex":"\\d+/\\d+/\\d+"
 					},
-					
+
 					{
 						"term_type": "Month",
 						"type":"date",
@@ -52,10 +52,10 @@
 						"regex":"\\d+/\\d+/\\d+"
 					}
 					]
-					
-					
+
+
 					},
-					
+
 					{
 					"name": "Rent",
 					"steps":[
@@ -65,8 +65,8 @@
 						"regex":"\\$\\s+\\d+"
 					}
 					]
-					
-					
+
+
 					},
 
 					{
@@ -77,28 +77,28 @@
 							"tag": "Broker",
 							"regex": "Chunk: {<NNP> <VBZ> <NNP>}"
 						},
-						
+
 						{
 							"type":"text",
 							"tag": "Purchaser",
-							"regex": "Chunk: {<NNP> <,> <NN> <VBD> <TO> <IN> <NNP>}"
+							"regex": "Chunk: {<NNP> <NN> <VBD> <TO> <IN> <NNP>}"
 						},
-						
+
 						{
 							"type":"text",
 							"tag": "Seller",
-							"regex": "Chunk: {<NNP> <,> <NN> <VBD> <TO> <IN> <NNP>}"
+							"regex": "Chunk: {<NNP> <NN> <VBD> <TO> <IN> <NNP>}"
 						}
 						]
-						
+
 					}
-				
-				
-				
-			
-				]			
-			
-			
+
+
+
+
+				]
+
+
 		}
 	}
 }

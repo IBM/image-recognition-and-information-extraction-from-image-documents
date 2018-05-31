@@ -249,7 +249,7 @@ To open the notebook, click on the edit icon to start editing the notebook on yo
 
 In the notebook, update the global variables in the cell following
 
-2.2 Global Variables section.
+2.3 Global Variables section.
 
 In the notebook, update the global variables in the cell following 2.2 Global Variables section.
 
