@@ -1,4 +1,4 @@
-TODOs FIXED?
+<TODOs FIXED?>
 # Identify information in document images - A composite code pattern
 
 This is a composite code pattern which will cover methodology for recognising images and identifying information from document images. [Part1](https://github.com/IBM/image-classification-using-cnn-and-keras) of this composite code pattern deals with classifying images. This code pattern is part2 of the composite code pattern.
