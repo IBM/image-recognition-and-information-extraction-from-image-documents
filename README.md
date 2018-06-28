@@ -1,4 +1,3 @@
-<TODOs FIXED?>
 # Identify information in document images - A composite code pattern
 
 This is a composite code pattern which will cover methodology for recognising images and identifying information from document images. [Part1](https://github.com/IBM/image-classification-using-cnn-and-keras) of this composite code pattern deals with classifying images. This code pattern is part2 of the composite code pattern.
@@ -185,7 +184,7 @@ Document type identified is displayed as shown in below image
 
 
 # Links
-* [Demo on youtube](https://youtu.be/ZKsIIKYDXUw) <TODO>
+* [Demo on youtube - link to be added]()
 * [Watson Studio](https://www.ibm.com/cloud/watson-studio)
 * [Object Storage](https://www.ibm.com/cloud/object-storage)
 
