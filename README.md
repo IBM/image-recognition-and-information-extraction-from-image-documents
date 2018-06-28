@@ -65,13 +65,13 @@ Classify images using [Image Classification Using CNN and Keras](https://github.
 
 ## 3. Text Extraction Using Optical Character Recognition
 
-[Previous section](#2-classification-of-image-documents) identified application form document among the list of all image documents. This section extracts text from the application form document that was identified in the above section. The text is then saved as text document on to Object Storage.
+[Previous section](#2-classification-of-image-documents) identified application form document among the list of all image documents. This section extracts text from the application form document that was identified in the above section. The text is then saved as text document on to Object Storage, that was created in [Part1](https://github.com/IBM/image-classification-using-cnn-and-keras) of this code pattern.
 
 We will use tesseract OCR for text extraction. We need to install tesseract engine on our local machine. And so we will run the next notebook on local.  
 * [Install Tesseract OCR](https://github.com/tesseract-ocr/tesseract/wiki). Follow the instructions according to your system specifications
 * To run the notebook locally, we will install Jupyter notebook on local. Refer [this link](http://jupyter.readthedocs.io/en/latest/install.html) for Jupyter installation instructions
 * Download `Convert_Image_to_Text.ipynb` from repo https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/notebooks/ and open it in Jupyter notebook on local machine
-* In the notebook, under section 2.1, update the path of the form document. The form document was identified by the previous notebook run.
+* In the notebook, under section 2.1, update the path of the form document. The form document was identified by the [step](#2-classification-of-image-documents).
 
 ![](images/analyze_res1.png)
 
@@ -84,12 +84,23 @@ Update the path of `credentials.json` file in `2.2 Connect to Object Storage` of
 
 Run the notebook by clicking on `Cell`>`Run all` in the menu bar.
 
-* The output of this section will be text content of image document, which will be saved to Object Storage as `form-doc-x.txt`, where x is the nth document. e,g, if it's first form document the file is stored as `form-doc-1.txt`. This file will be used later by another notebook to extract information from text extracted.
+* The output of this section will be text content of image document, which will be saved to Object Storage as `form-doc-x.txt`, where x is the nth document. e,g, if it's first form document the file is stored as `form-doc-1.txt`. This file will be used later by another notebook to extract information from text extracted. A sample text file is provided [here](https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/tree/master/Configuration/form-doc-1.txt)
 
 
 ## 4. Entity Extraction and Document Classification
 
-### 4.1 Create IBM Cloud services
+## 4.1 Add the extracted text file to Watson Studio
+In [Part1](https://github.com/IBM/image-classification-using-cnn-and-keras) of this code pattern we created Watson Studio service instance.
+* Go to that service instance from IBM Cloud Dashboard and click on `Assets` tab.
+* Click on 10/01 icon on the top right side of the screen.
+* Click on `files` tab under it.
+* Select `form-doc-1.txt`.
+* Click on `Add as data set` as shown in the below image and apply the changes.
+
+![](images/load_text_file.png)
+
+
+### 4.2 Create IBM Cloud services
 
 Create the following IBM Cloud service and give a unique name for the service:
 
@@ -97,8 +108,7 @@ Create the following IBM Cloud service and give a unique name for the service:
 
 ![](images/bluemix_service_nlu.png)
 
-
-### 4.2 Create notebook
+### 4.3 Create notebook
 
 Login to [IBM Cloud Dashboard](http://console.bluemix.net/). Click on the Watson Studio instance that was created earlier. Click `Get Started` button at the bottom of the page.
 
@@ -111,18 +121,16 @@ Login to [IBM Cloud Dashboard](http://console.bluemix.net/). Click on the Watson
 * Under Runtime select Default Python with 1 CPU and 4GB RAM
 * Click the `Create` button.
 
-![](images/create_notebook_from_url.png)
 
-
-### 4.3 Upload text data and configuration data to Object Storage
+### 4.4 Upload text data and configuration data to Object Storage
 
 There are two configuration files
 
-#### 4.3.1 Entities Config
+#### 4.4.1 Entities Config
 Check the file https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/Configuration/config_entity_extract.txt. This file contains regular expressions and chunking patterns which are used to identify entities and their values from the text of the form document.
 The configuration json file controls the way the text is classified. The classification process is divided into stages - Base Tagging and Domain Tagging. The Base Tagging stage can be used to specify keywords based classification, regular expression based classification, and tagging based on chunking expressions. The Domain Tagging stage can be used to specify classification that is specific to the domain, in order to augment the results from Watson Natural Language.
 
-#### 4.3.2 Document Type config
+#### 4.4.2 Document Type config
 Check the file https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/blob/master/Configuration/config_legaldocs.txt. This file contains information to identify the type of the document. It specifies what all entities should be available in a document to categorise the document to a particular type. E.g. A document can be a rental agreement document if it has entities `Leaser Term`, `Rent`, `Security Deposit`.
 
 * Download `config_entity_extract.txt` and `config_legaldocs.txt` from the repo https://github.com/IBM/image-recognition-and-information-extraction-from-image-documents/tree/master/Configuration
@@ -135,17 +143,16 @@ If you use your own data and configuration files, you will need to update the va
 To open the notebook, click on the edit icon to start editing the notebook on your project.
 
 In the notebook, update the global variables in the cell following
-
-2.3 Global Variables section.
+`2.3 Global Variables section`.
 
 Enter the filenames of the text file obtained as a result of `Text Extraction Using Optical Character Recognition` as well as the configuration files uploaded into Object Storage.
 
 ![](images/global_variables_entity.png)
 
-### 4.4 Create Watson Natural Language Understanding (NLU) service
+### 4.5 Create Watson Natural Language Understanding (NLU) service
 Create [Watson NLU](https://console.bluemix.net/catalog/services/natural-language-understanding) service instance if not already available
 
-### 4.5 Add Watson NLU credentials to notebook
+### 4.6 Add Watson NLU credentials to notebook
 Get Watson NLU service credentials:
 * On your IBM Cloud Dashboard, click on Watson NLU service instance. On the left hand navigation bar click `Service Credentials`
 * If you see `View Credentials` under `Service Credentials` then click on the down arrow mark beside `View Credentials`. Make of note of the credentials.
@@ -155,7 +162,7 @@ Select the cell below `2.1 Add your service credentials from IBM Cloud for the W
 
 ![](images/watson_nlu_credentials.png)
 
-### 4.6 Add Object Storage credentials to notebook
+### 4.7 Add Object Storage credentials to notebook
 * Select the cell below `2.2 Add your service credentials for Object Storage` section in the notebook to update the credentials for Object Store.
 * Delete the contents of the cell
 * Use `Find and Add Data` (look for the `10/01` icon) and its `Files` tab. You should see the file names uploaded earlier. Make sure your active cell is the empty one below `2.2 Add...`
