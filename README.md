@@ -181,7 +181,7 @@ This pattern aims to automate the identification of legal form document from oth
 
 1. First, we ran executed the code pattern [Image Classification using CNN and Keras](https://github.com/IBM/image-classification-using-cnn-and-keras). The model classified the images and marked the application for documents in the set of input images by providing it's path. e.g. `test_doc-external/Form1 copy 2.jpg`
 2. As a second step we ran the second notebook `conv_img_to_txt.ipynb`. Here we converted image to text using tesseract and uploaded the text file to Object storage
-3. As a final step we ran the notebook `Entity Extraction and Document Classification.ipynb`. This notebook used a couple of configuration files and identified required information from the text extracted in the second step above. It used Watson NLU and custom configuration to understand what information to identify based on what type of document is the text document. like, if the text is a purchase agreement, then it identifies a particular set of entities related to purchase agreement.
+3. As a final step we ran the notebook `Entity Extraction and Document Classification.ipynb`. This notebook used a couple of configuration files and identified required information from the text extracted in the second step above. It used Watson NLU and custom configuration to understand what information to identify based on what type of document is the text document like, if the text is a purchase agreement, then it identifies a particular set of entities related to purchase agreement.
 
 Entities identified from the form document are displayed as shown in below image
 ![](images/analyze_res2.png)
