@@ -47,7 +47,7 @@ We will use Python, Jupyter notebook, Python NLTK, Watson Natural Language Under
 
 
 # Steps
-Follow these steps to setup and run this developer journey. The steps are described in detail below.
+Follow these steps to setup and run this code pattern. The steps are described in detail below.
 1. [Sign up for IBM Watson Studio](#1-sign-up-for-ibm-watson-studio)
 2. [Classification of image Documents](#2-classification-of-image-documents)
 3. [Text Extraction Using Optical Character Recognition](#3-text-extraction-using-optical-character-recognition)
