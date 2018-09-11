@@ -19,6 +19,12 @@ After completing this pattern, you will learn how to:
 
 We will use Python, Jupyter notebook, Python NLTK, Watson Natural Language Understanding service and IBM Cloud Object Storage
 
+
+# Watch the Overview Video
+
+[![](https://img.youtube.com/vi/m6wf1gGw8EI/0.jpg)](https://youtu.be/m6wf1gGw8EI)
+
+
 ## Flow
 ![WKSCreateProject](images/Architecture.png)
 1. [code pattern](https://github.com/IBM/image-classification-using-cnn-and-keras) identifies application form document image
