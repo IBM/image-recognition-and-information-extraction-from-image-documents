@@ -8,7 +8,7 @@ Let us recap the use case described in [Part1](https://github.com/IBM/image-clas
 This code pattern covers the following aspects:
 * Classify images so as to separate out the application form documents, covered in [Part1](https://github.com/IBM/image-classification-using-cnn-and-keras)
 * Text extraction from application form documents
-* Identification of entities (information) from application form documents and also determine what the application is the form for, using configuration files. Entity configuration files are explained in this [code pattern](https://github.com/IBM/watson-document-classifier)
+* Identification of entities (information) from application form documents and also determine what the application form is for, using configuration files. Entity configuration files are explained in this [code pattern](https://github.com/IBM/watson-document-classifier)
 
 After completing this pattern, you will learn how to:
 
